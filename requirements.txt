@@ -1,0 +1,5 @@
+langchain>=0.0.360
+openai>=1.0.0
+chromadb>=0.3.26
+tqdm>=4.0.0
+python-dotenv>=1.0.0
