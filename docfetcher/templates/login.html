@@ -1,0 +1,187 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sign in — DocFetcher</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+
+
+
+<div class="login-shell">
+
+
+
+  <div class="login-panel">
+
+    <h2>DocFetcher</h2>
+
+    <p>Your intelligent corporate assistant that understands your documents and answers with accuracy.</p>
+
+  </div>
+
+
+
+  <div class="login-form-side">
+
+    <div class="heading">
+
+      <h1>Welcome back</h1>
+
+      <p>Sign in to continue to your account</p>
+
+    </div>
+
+
+
+    {% if form.errors %}
+
+      <div class="card-pad" style="background:var(--tag-hr-bg); color:var(--tag-hr); border-radius:var(--radius-sm); font-size:13px; margin-bottom:18px; padding:12px 14px;">
+
+        Your email or password didn't match. Please try again.
+
+      </div>
+
+    {% endif %}
+
+
+
+    {% if signup_error %}
+
+      <div class="card-pad" style="background:var(--tag-hr-bg); color:var(--tag-hr); border-radius:var(--radius-sm); font-size:13px; margin-bottom:18px; padding:12px 14px;">
+
+        Please enter a valid email and matching passwords, or choose a different email.
+
+      </div>
+
+    {% endif %}
+
+
+
+    {% if show_signup %}
+
+    <form method="post" action="{% url 'signup' %}">
+
+      {% csrf_token %}
+
+
+
+      <div class="field">
+
+        <label for="id_email">Email</label>
+
+        <input type="email" id="id_email" name="email" value="{{ signup_email|default:'' }}" placeholder="you@company.com" required autofocus>
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label for="id_password">Password</label>
+
+        <input type="password" id="id_password" name="password" placeholder="••••••••••" required>
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label for="id_confirm_password">Confirm Password</label>
+
+        <input type="password" id="id_confirm_password" name="confirm_password" placeholder="••••••••••" required>
+
+      </div>
+
+
+
+      <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+
+    </form>
+
+
+
+    <div class="form-foot">
+
+      Already have an account? <a href="{% url 'login' %}">Sign in</a>
+
+    </div>
+
+    {% else %}
+
+    <form method="post" action="{% url 'login' %}">
+
+      {% csrf_token %}
+
+
+
+      <div class="field">
+
+        <label for="id_email">Email</label>
+
+        <input type="email" id="id_email" name="email" placeholder="you@company.com" required autofocus>
+
+      </div>
+
+
+
+      <div class="field">
+
+        <label for="id_password">Password</label>
+
+        <input type="password" id="id_password" name="password" placeholder="••••••••••" required>
+
+      </div>
+
+
+
+      <div class="field-foot">
+
+        <a href="{% url 'password_reset' %}">Forgot password?</a>
+
+      </div>
+
+
+
+      <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+
+    </form>
+
+
+
+    <div class="form-foot">
+
+      Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+
+    </div>
+
+    {% endif %}
+
+  </div>
+
+
+
+</div>
+
+
+
+</body>
+
+</html>
