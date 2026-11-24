@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { api, Citation, RagResponse } from '../api';
+import { api, Citation, RagResponse, API_BASE } from '../api';
 import { 
   Send, Sparkles, FileText, CheckCircle2, X, Download, 
   ExternalLink, Upload, RefreshCw, Bot, User, ArrowRight
@@ -110,7 +110,7 @@ export const KnowledgeChat: React.FC<{ onNavigate: (page: string) => void }> = (
   };
 
   const handleDownload = (filename: string) => {
-    window.open(`http://127.0.0.1:8000/api/documents/download/by-name?filename=${encodeURIComponent(filename)}`, '_blank');
+    window.open(`${API_BASE}/api/documents/download/by-name?filename=${encodeURIComponent(filename)}`, '_blank');
   };
 
   return (

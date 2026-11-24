@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { api } from '../api';
+import { api, API_BASE } from '../api';
 import { 
   Upload, FileText, CheckCircle2, RefreshCw, AlertCircle, 
   Sparkles, Download, Trash2, MoreVertical, Search, File
@@ -72,7 +72,7 @@ export const DocumentsView: React.FC<{ onNavigate: (page: string) => void }> = (
   };
 
   const handleDownload = (filename: string) => {
-    window.open(`http://127.0.0.1:8000/api/documents/download/by-name?filename=${encodeURIComponent(filename)}`, '_blank');
+    window.open(`${API_BASE}/api/documents/download/by-name?filename=${encodeURIComponent(filename)}`, '_blank');
   };
 
   const filteredDocs = docs.filter((d) =>

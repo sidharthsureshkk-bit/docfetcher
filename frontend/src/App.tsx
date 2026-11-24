@@ -102,7 +102,9 @@ export const App: React.FC = () => {
     if (!currentUser) return;
 
     const orgId = currentUser.org_id;
-    const wsUrl = `ws://127.0.0.1:8000/ws/${orgId}`;
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const host = window.location.port === '3000' ? '127.0.0.1:8000' : window.location.host;
+    const wsUrl = `${protocol}//${host}/ws/${orgId}`;
 
     try {
       const socket = new WebSocket(wsUrl);

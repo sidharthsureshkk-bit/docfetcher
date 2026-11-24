@@ -22,10 +22,14 @@ if __name__ == "__main__":
                 print("💡 Note: You can add your Google Gemini API Key in backend/.env")
                 print("   Get a free key at: https://aistudio.google.com/")
     
-    print("\nStarting Uvicorn Server at: http://127.0.0.1:8000")
-    print("  • Web UI:       http://127.0.0.1:8000")
-    print("  • Swagger Docs: http://127.0.0.1:8000/docs")
-    print("  • WebSocket:    ws://127.0.0.1:8000/ws/{org_id}")
+    host = os.environ.get("HOST", "0.0.0.0")
+    port = int(os.environ.get("PORT", 8000))
+    reload = os.environ.get("ENV") != "production"
+
+    print(f"\nStarting Uvicorn Server at: http://{host}:{port}")
+    print(f"  • Web UI:       http://localhost:{port}")
+    print(f"  • Swagger Docs: http://localhost:{port}/docs")
+    print(f"  • WebSocket:    ws://localhost:{port}/ws/{{org_id}}")
     print("\nPress Ctrl+C to stop the server.\n")
 
-    uvicorn.run("backend.main:app", host="127.0.0.1", port=8000, reload=True)
+    uvicorn.run("backend.main:app", host=host, port=port, reload=reload)
