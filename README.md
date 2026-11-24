@@ -1,10 +1,6 @@
-# SmartCorp AI: Multi-Tenant Smart Workspace & Organizational Intelligence Platform
-**BCA Final Year Capstone Project — Production-Grade Specification & Implementation**
 
-Domain: Enterprise SaaS & Applied Generative AI  
+**BCA Final Year Project —
 Architecture: 3-Tier Full-Stack + RAG Vector Pipeline + WebSockets  
-
----
 
 ## 🌟 Overview & Key Features
 
