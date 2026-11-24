@@ -1,0 +1,79 @@
+# SmartCorp AI: Multi-Tenant Smart Workspace & Organizational Intelligence Platform
+**BCA Final Year Capstone Project — Production-Grade Specification & Implementation**
+
+Domain: Enterprise SaaS & Applied Generative AI  
+Architecture: 3-Tier Full-Stack + RAG Vector Pipeline + WebSockets  
+
+---
+
+## 🌟 Overview & Key Features
+
+SmartCorp AI unifies organizational knowledge retrieval, real-time collaboration, and executive resource analytics into a single responsive web platform.
+
+### The 5 Foundational Core Pillars
+1. **Multi-Tenancy & Role-Based Access Control (RBAC)**: Strict data isolation per organization (`org_id`). Role separation across **Admin**, **Manager**, and **Employee** with stateless JWT authentication.
+2. **Chat with Your Documents (AI RAG Pipeline)**: Upload company policy PDFs (e.g. Leave Rules, IT Guidelines). Uses `pypdf` to parse text into 500-character chunks indexed in a local `chromadb` persistent vector store. Google Gemini generates answers strictly grounded in document context.
+3. **Automatic To-Do List Maker**: Transcribes raw meeting notes and voice transcripts into actionable tasks with inferred deadlines and assignees.
+4. **Live Updates (Real-Time WebSockets)**: Native FastAPI WebSocket channel (`ws://127.0.0.1:8000/ws/{org_id}`) synchronizes task mutations, status changes, and activity logs across open browser tabs without refreshing.
+5. **Visual Progress Charts (Executive Control Tower)**: Recharts interactive Donut Chart for task status distribution and Bar Chart for team workload hours.
+
+### The 5 High-Impact Interactive Features
+1. **One-Click Meeting-to-Task Converter**: Split-screen workspace with human-in-the-loop review cards before batch-inserting into the live task board.
+2. **Visual "What-If" Workload Slider**: Real-time interactive simulation slider (0–30 hours) allowing managers to simulate rebalancing overloaded employees and calculating projected sprint days saved.
+3. **AI Answer Citations ("Click to Verify" Popover)**: Clickable inline source badges (`[Filename • Page X]`). Clicking any citation opens a popover displaying the exact verbatim excerpt extracted from that PDF.
+4. **Interactive Audit Trail Feed**: Chronological activity feed showing real-time workspace actions with actor initials and timestamps.
+5. **Prompt Template Chips**: One-click quick prompt shortcuts below the AI chat bar.
+
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Configure Your Gemini API Key
+Open `backend/.env` and paste your Google Gemini API key:
+```env
+GEMINI_API_KEY=AIzaSy...
+```
+*(Get a 100% free API key from [Google AI Studio](https://aistudio.google.com/))*
+
+### 2. Run the Unified Application
+Run the launcher script from the project root:
+```bash
+python run.py
+```
+Open your browser at:
+* **Web Application**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+* **Interactive Swagger API Documentation**: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+*(Optional: For frontend development with Vite Hot Reload, run `npm run dev` inside the `frontend` folder and visit `http://localhost:3000`)*
+
+---
+
+## 👥 Seeded Demo Accounts (Role-Based Access Control)
+
+The database comes pre-seeded with **Acme Tech Pvt Ltd** and 4 configured team members:
+
+| Name | Role | Email | Password | Access Privileges |
+| :--- | :--- | :--- | :--- | :--- |
+| **Sid** | **Admin** | `sid@acme.com` | `sid123` | Full access: Control Tower, Task Board, AI Assistant, Meeting Workflow, Knowledge Vault |
+| **Anush** | **Manager** | `anush@acme.com` | `anush123` | Executive access: Control Tower, Task Board, AI Assistant, Meeting Workflow |
+| **Nick** | **HR** | `nick@acme.com` | `nick123` | Organizational access: Task Board, AI Assistant, Knowledge Vault |
+| **Rahul** | **Employee** | `rahul@acme.com` | `rahul123` | **Isolated View**: Only assigned personal tasks & AI Assistant (high-level features hidden) |
+
+---
+
+## 🎨 Design System
+* **Style:** Minimalist Glassmorphic SaaS workspace (`backdrop-blur-xl`, translucent card layers, ambient radial lighting mesh).
+* **Icons:** Hairline Lucide icons (`strokeWidth={1.5}`) encased in frosted pastel pill containers.
+* **Real-time Synchronization:** Built-in WebSocket notifications with audio chimes and live activity stream.
+
+Use the quick switcher at the bottom-left of the sidebar to jump between accounts during your presentation.
+
+---
+
+## 🎯 4-Minute Viva & Recruiter Presentation Script
+
+1. **Login & Dashboard**: Log in as `admin@acme.com` (or use the Demo Admin button). Point out the KPI cards, status donut chart, and live Activity Stream feed.
+2. **The "What-If" Workload Slider**: Scroll to the workload section. Show how **Charlie Dev** is assigned 50 hours. Select Charlie as "From" and Bob as "To", then drag the range slider to 12 hours. Point out how the bar chart recalculates instantly and shows **1.5 sprint days saved** without touching live database records.
+3. **Knowledge Chat & Citation Verification**: Navigate to **Knowledge Chat**. Click the **"Summarize Leave Policy"** Prompt Template Chip. When the answer appears, click the **[Company_Handbook.pdf • Page 4]** source badge to open the floating popover proving zero hallucination.
+4. **Meeting-to-Task Converter**: Open **Meeting to Tasks**. Click **"Load Demo Notes"** and then **"Extract Action Items"**. Watch Gemini parse structured JSON tasks into editable preview cards. Click **"Approve & Publish to Task Board"**.
+5. **Real-time WebSockets**: Open a second browser tab side-by-side. Mark any task as "Done" or convert new tasks, and watch the cards and activity stream update live across both tabs!

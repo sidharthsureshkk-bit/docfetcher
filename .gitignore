@@ -1,0 +1,56 @@
+# Environments and API Keys (Never commit secrets!)
+.env
+backend/.env
+*.env
+*.env.*
+!.env.example
+!backend/.env.example
+
+# Python cache & build
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Local databases & vector storage
+*.db
+*.sqlite3
+chroma_db/
+*.log
+
+# Node & Frontend dependencies
+node_modules/
+frontend/node_modules/
+frontend/.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.swo
